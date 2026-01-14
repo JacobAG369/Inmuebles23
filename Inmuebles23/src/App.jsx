@@ -1,5 +1,5 @@
-import { Link, Outlet } from '@tanstack/react-router'
-import './App.css'
+import { Link, Outlet } from '@tanstack/react-router';
+import './App.css';
 
 function App() {
   return (
@@ -9,10 +9,14 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/" className="nav-link">Home</Link>
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/about" className="nav-link">About</Link>
+              <Link to="/about" className="nav-link">
+                About
+              </Link>
             </li>
           </ul>
         </nav>
@@ -21,7 +25,7 @@ function App() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
