@@ -3,29 +3,65 @@ import {
   createRootRoute,
   createRoute,
 } from '@tanstack/react-router';
-import App from './App.jsx';
-import Home from './pages/Home.jsx';
-import About from './pages/About.jsx';
+import Layout from './components/layout/Layout';
+import Home from './pages/Home';
+import Buy from './pages/Buy';
+import Rent from './pages/Rent';
+import Contact from './pages/Contact';
+import Login from './pages/Login';
+import PropertyDetail from './pages/PropertyDetail';
 
-// Define routes
+// Define root route
 const rootRoute = createRootRoute({
-  component: App,
+  component: Layout,
 });
 
-const homeRoute = createRoute({
+// Define routes
+const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
   component: Home,
 });
 
-const aboutRoute = createRoute({
+const buyRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/about',
-  component: About,
+  path: '/comprar',
+  component: Buy,
+});
+
+const rentRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/rentar',
+  component: Rent,
+});
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contactanos',
+  component: Contact,
+});
+
+const loginRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/login',
+  component: Login,
+});
+
+const propertyDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/inmueble/$id',
+  component: PropertyDetail,
 });
 
 // Create route tree
-const routeTree = rootRoute.addChildren([homeRoute, aboutRoute]);
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  buyRoute,
+  rentRoute,
+  contactRoute,
+  loginRoute,
+  propertyDetailRoute,
+]);
 
 // Create router instance
 const router = createRouter({
