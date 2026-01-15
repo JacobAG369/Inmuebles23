@@ -1,0 +1,539 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f7f7f7;
+}
+
+/* Barra de navegación */
+.barra-navegacion {
+    background: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo a{
+    text-decoration: none;
+    color: #ff385c;
+}
+
+
+.barra-navegacion a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #333;
+}
+
+/* Botones */
+.boton {
+    background: #ff385c;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 20px;
+}
+
+/* Sección principal */
+.seccion-principal {
+    text-align: center;
+    padding: 60px;
+    background: white;
+}
+
+/* Tarjetas */
+.contenedor-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+}
+
+.tarjeta-inmueble {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.tarjeta-inmueble img {
+    width: 100%;
+}
+
+.tarjeta-inmueble h3,
+.tarjeta-inmueble p {
+    padding: 10px;
+}
+
+.tarjeta-inmueble a {
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #ff385c;
+    color: white;
+    text-decoration: none;
+}
+
+/* Detalle inmueble */
+.detalle-inmueble {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+}
+
+.informacion-inmueble p {
+    margin: 10px 0;
+}
+
+.boton-comprar {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Login */
+.centrado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.formulario-login {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 300px;
+}
+
+.formulario-login input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.formulario-login button {
+    width: 100%;
+    padding: 10px;
+    background: #ff385c;
+    border: none;
+    color: white;
+    border-radius: 20px;
+}
+
+/* Pie de página */
+.pie-pagina {
+    text-align: center;
+    padding: 15px;
+}
+
+/* ===== BANNER / CARRUSEL ===== */
+
+.banner-carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 500px;
+}
+
+.carousel-item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-item.activo {
+    opacity: 1;
+    z-index: 1;
+}
+
+/* Texto encima del banner */
+.texto-banner {
+    position: absolute;
+    bottom: 30%;
+    left: 8%;
+    color: white;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 20px 30px;
+    border-radius: 12px;
+}
+
+.texto-banner h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.texto-banner p {
+    font-size: 18px;
+}
+
+
+/* ===== COMPRAR LISTADO ===== */
+
+.listado-inmuebles {
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.card-horizontal {
+    display: flex;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.imagen-inmueble {
+    width: 40%;
+    position: relative;
+}
+
+.imagen-inmueble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.etiqueta {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.info-inmueble {
+    width: 60%;
+    padding: 25px;
+}
+
+.precio {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.acciones {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.favorito {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+}
+
+/* ===== MODAL ===== */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-contenido {
+    background: white;
+    width: 90%;
+    max-width: 1100px;
+    border-radius: 16px;
+    display: flex;
+    overflow: hidden;
+}
+
+.modal-galeria {
+    width: 55%;
+    background: black;
+    position: relative;
+}
+
+.modal-galeria img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.modal-info {
+    width: 45%;
+    padding: 30px;
+}
+
+.precio-modal {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+.controles {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.controles button {
+    background: white;
+    border: none;
+    font-size: 30px;
+    margin: 0 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .card-horizontal {
+        flex-direction: column;
+    }
+
+    .imagen-inmueble,
+    .info-inmueble {
+        width: 100%;
+    }
+
+    .modal-contenido {
+        flex-direction: column;
+    }
+
+    .modal-galeria,
+    .modal-info {
+        width: 100%;
+    }
+}
+
+
+/* ===== PAGO SEGURO ===== */
+
+.seccion-pago {
+    max-width: 600px;
+    margin: 40px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.seccion-pago h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.seccion-pago p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-pago h3 {
+    margin: 20px 0 10px;
+    color: #333;
+}
+
+.grupo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.grupo label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.grupo input,
+.grupo textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.grupo textarea {
+    resize: none;
+    height: 80px;
+}
+
+.fila {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-pagar {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-pagar:hover {
+    opacity: 0.9;
+}
+
+.seguridad {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #777;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .fila {
+        flex-direction: column;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ===== CONTACTANOS ===== */
+
+.seccion-contacto {
+    padding: 40px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.seccion-contacto h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.seccion-contacto p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.contacto-contenido {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+/* Formulario */
+.form-contacto {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.form-contacto h3 {
+    margin-bottom: 20px;
+}
+
+.form-contacto .grupo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-contacto input,
+.form-contacto textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.form-contacto textarea {
+    resize: none;
+    height: 100px;
+}
+
+.btn-enviar {
+    width: 100%;
+    padding: 12px;
+    background: #ff385c;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* Info */
+.info-contacto {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.info-contacto h3 {
+    margin-bottom: 15px;
+}
+
+.info-contacto p {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+/* Mapa */
+.mapa iframe {
+    width: 100%;
+    height: 250px;
+    border: 0;
+    border-radius: 12px;
+    margin-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contacto-contenido {
+        grid-template-columns: 1fr;
+    }
+}
