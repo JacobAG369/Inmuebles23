@@ -1,11 +1,14 @@
-import { Link } from '@tanstack/react-router';
-import { Menu } from 'lucide-react';
+import { Link, useNavigate } from '@tanstack/react-router';
+import { LogOut, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useState } from 'react';
+import { hasToken, logout } from '@/lib/auth';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const isAuthed = hasToken();
 
   const navItems = [
     { to: '/', label: 'Inicio' },
@@ -13,6 +16,11 @@ export default function Header() {
     { to: '/rentar', label: 'Rentar' },
     { to: '/contactanos', label: 'Contactanos' },
   ];
+
+  const handleLogout = async () => {
+    await logout();
+    navigate({ to: '/login' });
+  };
 
   return (
     <header className="bg-white py-4 px-6 md:px-10 flex justify-between items-center shadow-md sticky top-0 z-50">
@@ -33,11 +41,24 @@ export default function Header() {
             {item.label}
           </Link>
         ))}
-        <Link to="/login">
-          <Button className="bg-[#ff385c] hover:bg-[#e0314f] text-white rounded-full px-6">
-            Iniciar sesión
+        {isAuthed ? (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-gray-800 hover:text-[#ff385c]"
+            onClick={handleLogout}
+            aria-label="Cerrar sesion"
+            title="Cerrar sesion"
+          >
+            <LogOut className="h-5 w-5" />
           </Button>
-        </Link>
+        ) : (
+          <Link to="/login">
+            <Button className="bg-[#ff385c] hover:bg-[#e0314f] text-white rounded-full px-6">
+              Iniciar sesión
+            </Button>
+          </Link>
+        )}
       </nav>
 
       {/* Mobile Navigation */}
@@ -60,11 +81,23 @@ export default function Header() {
                   {item.label}
                 </Link>
               ))}
-              <Link to="/login" onClick={() => setIsOpen(false)}>
-                <Button className="w-full bg-[#ff385c] hover:bg-[#e0314f] text-white rounded-full">
-                  Iniciar sesión
+              {isAuthed ? (
+                <Button
+                  className="w-full bg-[#ff385c] hover:bg-[#e0314f] text-white rounded-full"
+                  onClick={async () => {
+                    setIsOpen(false);
+                    await handleLogout();
+                  }}
+                >
+                  Cerrar sesión
                 </Button>
-              </Link>
+              ) : (
+                <Link to="/login" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-[#ff385c] hover:bg-[#e0314f] text-white rounded-full">
+                    Iniciar sesión
+                  </Button>
+                </Link>
+              )}
             </nav>
           </SheetContent>
         </Sheet>

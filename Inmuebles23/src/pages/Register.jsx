@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { login as loginRequest, setToken } from '@/lib/auth';
+import { apiFetch } from '@/lib/api';
+import { setToken } from '@/lib/auth';
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -17,11 +20,19 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const data = await loginRequest(email, password);
+      const data = await apiFetch('/register', {
+        method: 'POST',
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          password_confirmation: passwordConfirmation,
+        }),
+      });
       setToken(data.access_token);
       navigate({ to: '/' });
     } catch (err) {
-      setError(err?.message || 'No se pudo iniciar sesion');
+      setError(err?.message || 'No se pudo registrar');
     } finally {
       setLoading(false);
     }
@@ -33,9 +44,17 @@ export default function Login() {
         className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-sm"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Crear cuenta</h2>
 
         <div className="space-y-4">
+          <Input
+            type="text"
+            placeholder="Nombre completo"
+            required
+            className="py-6"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+          />
           <Input
             type="email"
             placeholder="Correo electrónico"
@@ -52,6 +71,14 @@ export default function Login() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
+          <Input
+            type="password"
+            placeholder="Confirmar contraseña"
+            required
+            className="py-6"
+            value={passwordConfirmation}
+            onChange={(event) => setPasswordConfirmation(event.target.value)}
+          />
 
           {error ? (
             <p className="text-sm text-red-600 text-center">{error}</p>
@@ -62,16 +89,16 @@ export default function Login() {
             type="submit"
             disabled={loading}
           >
-            {loading ? 'Entrando...' : 'Entrar'}
+            {loading ? 'Creando cuenta...' : 'Registrarme'}
           </Button>
 
           <p className="text-center text-sm text-gray-600 mt-4">
-            ¿No tienes cuenta?{' '}
+            ¿Ya tienes cuenta?{' '}
             <Link
-              to="/registro"
+              to="/login"
               className="text-[#ff385c] font-semibold hover:underline"
             >
-              Regístrate
+              Inicia sesión
             </Link>
           </p>
         </div>
