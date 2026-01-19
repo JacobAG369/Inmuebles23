@@ -19,7 +19,7 @@ export async function apiFetch(path, options = {}) {
     });
   } catch (error) {
     const networkError = new Error(
-      'No se pudo conectar con el servidor. Verifica que el backend este activo.'
+      'No se pudo conectar con el servidor. Verifica que el backend este activo.',
     );
     networkError.cause = error;
     throw networkError;
