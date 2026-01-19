@@ -12,6 +12,7 @@ import Contact from './pages/Contact';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import PropertyDetail from './pages/PropertyDetail';
+import Payment from './pages/Payment';
 import { hasToken } from './lib/auth';
 
 // Define root route
@@ -64,6 +65,17 @@ const contactRoute = createRoute({
   component: Contact,
 });
 
+const paymentRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/pago',
+  beforeLoad: () => {
+    if (!hasToken()) {
+      throw redirect({ to: '/login' });
+    }
+  },
+  component: Payment,
+});
+
 const loginRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/login',
@@ -97,6 +109,25 @@ const propertyDetailRoute = createRoute({
   component: PropertyDetail,
 });
 
+const notFoundRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '*',
+  component: () => (
+    <div className="container mx-auto px-4 py-20 text-center">
+      <h2 className="text-3xl font-bold mb-4">Página no encontrada</h2>
+      <p className="text-gray-600 mb-6">
+        La página que buscas no existe o ha sido movida.
+      </p>
+      <a
+        href="/"
+        className="inline-flex items-center justify-center rounded-full bg-[#ff385c] px-8 py-3 text-white text-lg font-semibold hover:bg-[#e0314f] transition-colors"
+      >
+        Volver al inicio
+      </a>
+    </div>
+  ),
+});
+
 // Create route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -106,6 +137,8 @@ const routeTree = rootRoute.addChildren([
   loginRoute,
   registerRoute,
   propertyDetailRoute,
+  paymentRoute,
+  notFoundRoute,
 ]);
 
 // Create router instance
